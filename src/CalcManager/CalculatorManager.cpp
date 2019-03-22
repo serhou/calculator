@@ -1,4 +1,4 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
 #include "pch.h"
@@ -24,15 +24,15 @@ namespace CalculationManager
 {
     CalculatorManager::CalculatorManager(_In_ ICalcDisplay* displayCallback, _In_ IResourceProvider* resourceProvider) :
         m_displayCallback(displayCallback),
+        m_currentCalculatorEngine(nullptr),
         m_resourceProvider(resourceProvider),
+        m_inHistoryItemLoadMode(false),
+        m_persistedPrimaryValue(),
+        m_isExponentialFormat(false),
         m_currentDegreeMode(Command::CommandNULL),
         m_savedDegreeMode(Command::CommandDEG),
-        m_isExponentialFormat(false),
-        m_persistedPrimaryValue(),
-        m_currentCalculatorEngine(nullptr),
-        m_pStdHistory(new CalculatorHistory(CM_STD, MAX_HISTORY_ITEMS)),
-        m_pSciHistory(new CalculatorHistory(CM_SCI, MAX_HISTORY_ITEMS)),
-        m_inHistoryItemLoadMode(false)
+        m_pStdHistory(new CalculatorHistory(MAX_HISTORY_ITEMS)),
+        m_pSciHistory(new CalculatorHistory(MAX_HISTORY_ITEMS))
     {
         CCalcEngine::InitialOneTimeOnlySetup(*m_resourceProvider);
     }
@@ -292,7 +292,7 @@ namespace CalculationManager
             break;
         case Command::CommandFE:
             m_isExponentialFormat = !m_isExponentialFormat;
-            // fall through
+            [[fallthrough]];
         default:
             m_currentCalculatorEngine->ProcessCommand(static_cast<WPARAM>(command));
             break;
@@ -308,7 +308,10 @@ namespace CalculationManager
     unsigned char CalculatorManager::MapCommandForSerialize(Command command)
     {
         unsigned int commandToSave = static_cast<unsigned int>(command);
-        commandToSave > UCHAR_MAX ? commandToSave -= UCHAR_MAX : commandToSave;
+        if (commandToSave > UCHAR_MAX)
+        {
+            commandToSave -= UCHAR_MAX;
+        }
         return static_cast<unsigned char>(commandToSave);
     }
 
@@ -360,7 +363,7 @@ namespace CalculationManager
     /// <param name = "serializedPrimaryDisplay">Serialized Rational of primary display</param>
     void CalculatorManager::DeSerializePrimaryDisplay(const vector<long> &serializedPrimaryDisplay)
     {
-        if (serializedPrimaryDisplay.size() == 0)
+        if (serializedPrimaryDisplay.empty())
         {
             return;
         }
