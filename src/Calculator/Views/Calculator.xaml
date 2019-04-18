@@ -36,106 +36,7 @@
         </DataTemplate>
 
         <!-- TextBox Styles -->
-
-        <Style x:Key="OperandTextBoxStyle" TargetType="controls:OperandTextBox">
-            <Setter Property="MinWidth" Value="32"/>
-            <Setter Property="MinHeight" Value="20"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="SelectionHighlightColor" Value="{ThemeResource SystemControlBackgroundAccentBrush}"/>
-            <Setter Property="FontSize" Value="{ThemeResource BodyFontSize}"/>
-            <Setter Property="IsTextScaleFactorEnabled" Value="False"/>
-            <Setter Property="TextAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="2,0,3,0"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="controls:OperandTextBox">
-                        <Grid x:Name="BackgroundElement" Background="{ThemeResource SystemControlBackgroundAltHighBrush}">
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Disabled"/>
-                                    <VisualState x:Name="Normal">
-                                        <VisualState.Setters>
-                                            <Setter Target="ContentElement.Foreground" Value="{ThemeResource SystemControlForegroundAccentBrush}"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="PointerOver">
-                                        <VisualState.Setters>
-                                            <Setter Target="BackgroundElement.Background" Value="{ThemeResource SystemControlHighlightListAccentLowBrush}"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="Focused">
-                                        <VisualState.Setters>
-                                            <Setter Target="BackgroundElement.Background" Value="{ThemeResource SystemControlForegroundChromeWhiteBrush}"/>
-                                            <Setter Target="ContentElement.Foreground" Value="{ThemeResource SystemControlBackgroundChromeBlackHighBrush}"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                            <ScrollViewer x:Name="ContentElement"
-                                          Padding="{TemplateBinding Padding}"
-                                          VerticalAlignment="Center"
-                                          AutomationProperties.AccessibilityView="Raw"
-                                          HorizontalScrollBarVisibility="Hidden"
-                                          HorizontalScrollMode="Disabled"
-                                          IsDeferredScrollingEnabled="False"
-                                          IsHorizontalRailEnabled="True"
-                                          IsTabStop="False"
-                                          IsVerticalRailEnabled="False"
-                                          VerticalScrollBarVisibility="Disabled"
-                                          VerticalScrollMode="Disabled"
-                                          ZoomMode="Disabled"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="OperatorTextBoxStyle" TargetType="controls:OperatorTextBox">
-            <Setter Property="MinWidth" Value="4"/>
-            <Setter Property="MinHeight" Value="20"/>
-            <Setter Property="Padding" Value="0"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="controls:OperatorTextBox">
-                        <Grid x:Name="BackgroundElement" Background="{ThemeResource SystemControlBackgroundAltHighBrush}">
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Disabled"/>
-                                    <VisualState x:Name="Normal">
-                                        <VisualState.Setters>
-                                            <Setter Target="textElement.Foreground" Value="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="PointerOver">
-                                        <VisualState.Setters>
-                                            <Setter Target="BackgroundElement.Background" Value="{ThemeResource SystemControlHighlightListAccentLowBrush}"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="Focused">
-                                        <VisualState.Setters>
-                                            <Setter Target="BackgroundElement.Background" Value="{ThemeResource SystemControlBackgroundAccentBrush}"/>
-                                            <Setter Target="textElement.Foreground" Value="{ThemeResource SystemControlForegroundChromeWhiteBrush}"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                            <TextBlock x:Name="textElement"
-                                       Margin="0,-2,0,2"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       Foreground="{TemplateBinding Foreground}"
-                                       FontSize="16"
-                                       IsHitTestVisible="True"
-                                       IsTextScaleFactorEnabled="False"
-                                       Text="{Binding Token}"
-                                       TextAlignment="Center"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
+       
         <Style TargetType="controls:OverflowTextBlock">
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="Template">
@@ -255,48 +156,17 @@
         </Style>
 
         <!-- Calculation Result Styles -->
-
-        <Style x:Key="ResultsStyleL"
-               x:Name="ResultsStyleL"
-               BasedOn="{StaticResource CalculationResultStyleL}"
+        <Style x:Key="ResultsStyle"
+               BasedOn="{StaticResource CalculationResultStyle}"
                TargetType="controls:CalculationResult">
             <Setter Property="HorizontalContentAlignment" Value="Right"/>
             <Setter Property="VerticalContentAlignment" Value="Top"/>
-            <Setter Property="FontSize" Value="{StaticResource CalcResultFontSizeL}"/>
-            <Setter Property="MinFontSize" Value="12"/>
-            <Setter Property="IsActive" Value="True"/>
             <Setter Property="DisplayMargin" Value="0,0,0,0"/>
-            <Setter Property="MaxExpressionHistoryCharacters" Value="51"/>
-        </Style>
-
-        <Style x:Key="ResultsStyleM"
-               x:Name="ResultsStyleM"
-               BasedOn="{StaticResource CalculationResultStyleM}"
-               TargetType="controls:CalculationResult">
-            <Setter Property="HorizontalContentAlignment" Value="Right"/>
-            <Setter Property="VerticalContentAlignment" Value="Top"/>
-            <Setter Property="FontSize" Value="{StaticResource CalcResultFontSizeM}"/>
-            <Setter Property="MinFontSize" Value="12"/>
             <Setter Property="IsActive" Value="True"/>
-            <Setter Property="DisplayMargin" Value="0,0,0,0"/>
-            <Setter Property="MaxExpressionHistoryCharacters" Value="30"/>
-        </Style>
-
-        <Style x:Key="ResultsStyleS"
-               x:Name="ResultsStyleS"
-               BasedOn="{StaticResource CalculationResultStyleS}"
-               TargetType="controls:CalculationResult">
-            <Setter Property="HorizontalContentAlignment" Value="Right"/>
-            <Setter Property="VerticalContentAlignment" Value="Top"/>
-            <Setter Property="FontSize" Value="{StaticResource CalcResultFontSizeS}"/>
             <Setter Property="MinFontSize" Value="12"/>
-            <Setter Property="IsActive" Value="True"/>
-            <Setter Property="DisplayMargin" Value="0,0,0,0"/>
-            <Setter Property="MaxExpressionHistoryCharacters" Value="30"/>
         </Style>
 
         <!-- Button Styles -->
-
         <Style x:Key="ScrollButtonStyle" TargetType="Button">
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Padding" Value="0,0,0,0"/>
@@ -585,25 +455,34 @@
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowHeight="800"/>
                     </VisualState.StateTriggers>
-                    <Storyboard Completed="OnResultsLayoutChanged"/>
+                    <VisualState.Setters>
+                        <Setter Target="Results.MaxFontSize" Value="72"/>
+                        <Setter Target="Results.MaxExpressionHistoryCharacters" Value="51"/>
+                        <Setter Target="RowResult.MinHeight" Value="108"/>
+                        <Setter Target="RowResult.Height" Value="72*"/>
+                    </VisualState.Setters>
                 </VisualState>
-                <VisualState x:Name="ResultsProgM">
+                <VisualState x:Name="ResultsM">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowHeight="640"/>
+                        <AdaptiveTrigger x:Name="ResultsMVisualStateTrigger" MinWindowHeight="640"/>
                     </VisualState.StateTriggers>
-                    <Storyboard Completed="OnResultsLayoutChanged"/>
-                </VisualState>
-                <VisualState x:Name="ResultsSciM">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowHeight="544"/>
-                    </VisualState.StateTriggers>
-                    <Storyboard Completed="OnResultsLayoutChanged"/>
+                    <VisualState.Setters>
+                        <Setter Target="Results.MaxFontSize" Value="46"/>
+                        <Setter Target="Results.MaxExpressionHistoryCharacters" Value="30"/>
+                        <Setter Target="RowResult.MinHeight" Value="72"/>
+                        <Setter Target="RowResult.Height" Value="72*"/>
+                    </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="ResultsS">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowHeight="0"/>
                     </VisualState.StateTriggers>
-                    <Storyboard Completed="OnResultsLayoutChanged"/>
+                    <VisualState.Setters>
+                        <Setter Target="Results.MaxFontSize" Value="26"/>
+                        <Setter Target="Results.MaxExpressionHistoryCharacters" Value="30"/>
+                        <Setter Target="RowResult.MinHeight" Value="42"/>
+                        <Setter Target="RowResult.Height" Value="42*"/>
+                    </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
@@ -630,7 +509,7 @@
                                         x:Uid="CalculatorResults"
                                         Grid.Row="2"
                                         Margin="0,0,0,0"
-                                        Style="{ThemeResource ResultsStyleM}"
+                                        Style="{ThemeResource ResultsStyle}"
                                         AutomationProperties.AutomationId="CalculatorResults"
                                         AutomationProperties.HeadingLevel="Level1"
                                         AutomationProperties.Name="{x:Bind Model.CalculationResultAutomationName, Mode=OneWay}"
